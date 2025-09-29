@@ -125,9 +125,14 @@ def default(progress: bool = True):
 
     return predictor
 
-def all8_sslmos_wavlm_large(progress: bool = True, cpu=True):
+def sheet_ssqa(
+        progress: bool = True,
+        cpu=True
+        _id="bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337"
+    ):
     """
-    SSL-MOS model trained with all EIGHT training sets in MOS-Bench, as of Sep 2025.
+    Load pretrained model from HuggingFace Models.
+    As of Sep 2025, the default is the SSL-MOS model trained with all EIGHT training sets in MOS-Bench.
 
     Args:
         progress - Whether to show model checkpoint load progress
@@ -142,10 +147,10 @@ def all8_sslmos_wavlm_large(progress: bool = True, cpu=True):
     # get config
     hf_hub_download(
         repo_id="unilight/sheet-models",
-        filename="bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337/config.yml",
+        filename=os.path.join(_id, "config.yml"),
         local_dir=torch.hub.get_dir()
     )
-    config_dst = os.path.join(torch.hub.get_dir(), "bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337/config.yml")
+    config_dst = os.path.join(torch.hub.get_dir(), _id, "config.yml")
     with open(config_dst) as f:
         config = yaml.load(f, Loader=yaml.Loader)
 
@@ -160,10 +165,10 @@ def all8_sslmos_wavlm_large(progress: bool = True, cpu=True):
     # download model
     hf_hub_download(
         repo_id="unilight/sheet-models",
-        filename="bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337/checkpoint-best.bin",
+        filename=os.path.join(_id, , "checkpoint-best.bin"),
         local_dir=torch.hub.get_dir()
     )
-    checkpoint_dst = os.path.join(torch.hub.get_dir(), "bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337/checkpoint-best.bin")
+    checkpoint_dst = os.path.join(torch.hub.get_dir(), _id, "checkpoint-best.bin")
 
     # load model
     model.load_state_dict(torch.load(checkpoint_dst, weights_only=True, map_location=map_location))

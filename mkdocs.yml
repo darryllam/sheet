@@ -12,8 +12,11 @@ markdown_extensions:
   - pymdownx.superfences
 plugins:
   - search
+  - git-revision-date-localized
+  - social
 nav:
   - Home: index.md
   - MOS-Bench: mos-bench.md
   - Training guide: training.md
   - Benchmarking guide: benchmarking.md
+  - List of pre-trained models: pretrained-models.md

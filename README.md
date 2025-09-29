@@ -29,7 +29,13 @@ There are three usages of SHEET:
 
 We utilize `torch.hub` to provide a convenient way to load pre-trained SSQA models and predict scores of wav files or torch tensors.
 
+You can use the `_id` argument to specify which pre-trained model to use. If not specified, the default model is used. See the [list of pre-trained models](https://unilight.github.io/sheet/pretrained-models) page for the complete table.
+
+
 > [!NOTE]
+> Since SHEET is a on-going project, if you use our pre-trained model in you paper, it is suggested to specify the version. For instance: `SHEET SSL-MOS v0.1.0`, `SHEET SSL-MOS v0.2.5`, etc.
+
+> [!TIP]
 > You don't need to install sheet following the [installation instructions](#instsallation). However, you might need to install the following:
 > ```
 > sheet-sqa
@@ -37,10 +43,12 @@ We utilize `torch.hub` to provide a convenient way to load pre-trained SSQA mode
 > ```
 
 ```python
-# load pre-trained model
->>> predictor = torch.hub.load("unilight/sheet:v0.2.4post3", "all8_sslmos_wavlm_large", trust_repo=True, force_reload=True)
+# load default pre-trained model
+>>> predictor = torch.hub.load("unilight/sheet:v0.2.5", "sheet_ssqa", trust_repo=True, force_reload=True)
+# use `_id` to specify which pre-trained model to use
+>>> predictor = torch.hub.load("unilight/sheet:v0.2.5", "sheet_ssqa", trust_repo=True, force_reload=True, _id="bvcc/sslmos-wavlm_large/1337")
 # if you want to use cuda, use either of the following
->>> predictor = torch.hub.load("unilight/sheet:v0.2.4post3", "all8_sslmos_wavlm_large", trust_repo=True, force_reload=True, cpu=False)
+>>> predictor = torch.hub.load("unilight/sheet:v0.2.5", "sheet_ssqa", trust_repo=True, force_reload=True, cpu=False)
 >>> predictor.model.cuda()
 
 # you can either provide a path to your wav file
@@ -56,6 +64,8 @@ We utilize `torch.hub` to provide a convenient way to load pre-trained SSQA mode
 ```
 
 ## Instsallation 
+
+Full installation is needed if your goal is to do **training**.
 
 ### Editable installation with virtualenv 
 

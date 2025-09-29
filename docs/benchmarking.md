@@ -31,7 +31,7 @@ After the data preparation stage is done, you should get the .csv files in `data
 
 ## Metric calculation
 
-You may then use your MOS predictor to run inference over the samples in the test set csv files. We suggest you to overwrite (or resave) the csv file by adding a ``answer`` column. Then, you can use the following command to calculate the metrics. Here we provide an example results csv file in [assets/example_results.csv](../assets/example_results.csv), which is based on BVCC test.
+You may then use your MOS predictor to run inference over the samples in the test set csv files. We suggest you to overwrite (or resave) the csv file by adding a ``answer`` column. Then, you can use the following command to calculate the metrics. Here we provide an example results csv file in [assets/example_results.csvhttps://github.com/unilight/sheet/blob/main/assets/example_results.csv), which is based on BVCC test.
 
 ```python
 python utils/calculate_metrics.py --csv assets/example_results.csv

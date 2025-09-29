@@ -1,5 +1,6 @@
 site_name: SHEET / MOS-Bench
 repo_url: https://github.com/unilight/sheet
+site_url: https://unilight.github.io/sheet
 theme:
   name: material
   icon:
@@ -12,8 +13,11 @@ markdown_extensions:
   - pymdownx.superfences
 plugins:
   - search
-  - git-revision-date-localized
-  - social
+#  - git-revision-date-localized
+  - social:
+      cards_layout_options:
+        title: SHEET / MOS-Bench
+        description: Documentation website of the SHEET toolkit and the MOS-Bench dataset collection.
 nav:
   - Home: index.md
   - MOS-Bench: mos-bench.md

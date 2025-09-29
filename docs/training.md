@@ -11,9 +11,10 @@ We provide complete experiment recipes, i.e., set of scripts to download and pro
 You can train your own speech quality predictor using the datasets in MOS-Bench. Each The starting point of each recipe is the `run.sh` file.
 
 There are two ways you can train models:
-- Train models using a single dataset at a time. This is called "**single dataset training**". You can refer to the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section for available datasets.
+- Train models using a single dataset at a time. This is called "**single dataset training**". You can refer to the [Training set](mos-bench.md) section for available datasets.
 - Train models by pooling multiple datasets. This is called "**multiple dataset training**". Currently we support the following recipe:
-    - Recipe: `egs/bvcc+nisqa+pstn+singmos+somos+tencent+tmhint-qi`
+    - `egs/bvcc+nisqa+pstn+singmos+somos+tencent+tmhint-qi`
+    - `egs/bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos`
 
 After you train your models, you can run benchmarking on the test sets in MOS-Bench.
 

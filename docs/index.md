@@ -90,7 +90,7 @@ Please see [benchmarking guide](benchmarking.md) for detailed instructions.
 
 - Original repo link: https://github.com/unilight/LDNet
 - Paper link: https://arxiv.org/abs/2110.09103
-- Example config: [egs/bvcc/conf/ldnet-ml.yaml](../egs/bvcc/conf/ldnet-ml.yaml)
+- Example config: [egs/bvcc/conf/ldnet-ml.yaml](https://github.com/unilight/sheet/blob/main/egs/bvcc/conf/ldnet-ml.yaml)
 
 ### SSL-MOS
 - Original repo link: https://github.com/nii-yamagishilab/mos-finetune-ssl
@@ -101,7 +101,7 @@ Please see [benchmarking guide](benchmarking.md) for detailed instructions.
 ### UTMOS (Strong learner)
 - Original repo link: https://github.com/sarulab-speech/UTMOS22/tree/master/strong
 - Paper link: https://arxiv.org/abs/2204.02152
-- Example config: [egs/bvcc/conf/utmos-strong.yaml](egs/bvcc/conf/utmos-strong.yaml)
+- Example config: [egs/bvcc/conf/utmos-strong.yaml](https://github.com/unilight/sheet/blob/main/egs/bvcc/conf/utmos-strong.yaml)
 
 !!! note
     

@@ -74,23 +74,23 @@ We provide a (possibly) easier-to-read [Google Spreadsheet file](https://docs.go
 ### Details (WIP)
 
 - BVCC test
-    - See descriptions in the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section.
+    - See descriptions in the [Training sets](#details-wip) section.
     - Benchmark script: `BENCHMARKS/run_bvcc_test.sh`
 - BC19 test (VMC'22 OOD track)
     - Dataset download link: https://zenodo.org/records/6572573
     - Paper link: [[VoiceMOS Challenge 2022](https://arxiv.org/abs/2203.11389)]
     - Benchmark script: `BENCHMARKS/run_bc19_test.sh`
 - SOMOS test
-    - See descriptions in the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section.
+    - See descriptions in the [Training sets](#details-wip) section.
     - Benchmark script: `BENCHMARKS/run_somos_test.sh`
 - SingMOS test (VMC'24 track 2)
-    - See descriptions in the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section.
+    - See descriptions in the [Training sets](#details-wip) section.
     - Benchmark script: `BENCHMARKS/run_singmos_test.sh`
 - NISQA FOR/P501/LIVETALK
-    - See descriptions in the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section.
+    - See descriptions in the [Training sets](#details-wip) section.
     - Benchmark script: `BENCHMARKS/run_nisqa_test.sh`
 - TMHINT-QI test
-    - See descriptions in the [Training datasets in MOS-Bench](#training-datasets-in-mos-bench) section.
+    - See descriptions in the [Training sets](#details-wip) section.
     - Benchmark script: `BENCHMARKS/run_tmhint_qi_test.sh`
 - VMC'23 track 1a/1b/2/3 (BC2023, SVCC2023, TMHINTQI-(S))
     - Paper link: [[arXiv version](https://arxiv.org/abs/2310.02640)]

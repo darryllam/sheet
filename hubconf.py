@@ -25,6 +25,7 @@ URLS = {
     },
 }
 
+
 def read_wav(wav_path):
     # read waveform
     waveform, sample_rate = torchaudio.load(
@@ -49,12 +50,14 @@ def read_wav(wav_path):
 
     return waveform, sample_rate
 
+
 class Predictor:
     """Wrapper class for unified waveform reading"""
+
     def __init__(self, model, config):
         self.model = model
         self.config = config
-    
+
     def predict(self, wav_path=None, wav=None):
         """
         Args:
@@ -62,13 +65,17 @@ class Predictor:
         """
         if wav is None:
             if wav_path is None:
-                raise ValueError("Either wav_path or wav must be set. Please provide one.")
+                raise ValueError(
+                    "Either wav_path or wav must be set. Please provide one."
+                )
             else:
                 wav, _ = read_wav(wav_path)
         else:
             if wav_path is not None:
-                raise ValueError("Either wav_path or wav can be set. Please choose one.")
-        
+                raise ValueError(
+                    "Either wav_path or wav can be set. Please choose one."
+                )
+
         if type(wav) is not torch.Tensor:
             raise ValueError("wav must be torch.tensor")
         if len(wav.shape) > 1:
@@ -92,6 +99,7 @@ class Predictor:
         pred_mean_scores = outputs["scores"].cpu().detach().numpy()[0]
         return pred_mean_scores
 
+
 def default(progress: bool = True):
     """
     The default model is the SSL-MOS model with MDF trained with all seven training sets in MOS-Bench.
@@ -101,7 +109,9 @@ def default(progress: bool = True):
     """
 
     # get config
-    config_dst = os.path.join(torch.hub.get_dir(), "configs", os.path.basename(URLS["default"]["conf"]))
+    config_dst = os.path.join(
+        torch.hub.get_dir(), "configs", os.path.basename(URLS["default"]["conf"])
+    )
     os.makedirs(os.path.join(torch.hub.get_dir(), "configs"), exist_ok=True)
     torch.hub.download_url_to_file(URLS["default"]["conf"], dst=config_dst)
     with open(config_dst) as f:
@@ -110,13 +120,16 @@ def default(progress: bool = True):
     # init model
     if config["model_type"] == "SSLMOS":
         from sheet.models.sslmos import SSLMOS
+
         model = SSLMOS(
             config["model_input"],
             **config["model_params"],
         )
 
     # load model
-    state_dict = torch.hub.load_state_dict_from_url(url=URLS["default"]["model"], map_location="cpu", progress=progress)
+    state_dict = torch.hub.load_state_dict_from_url(
+        url=URLS["default"]["model"], map_location="cpu", progress=progress
+    )
     model.load_state_dict(state_dict)
     model.eval()
 
@@ -125,11 +138,12 @@ def default(progress: bool = True):
 
     return predictor
 
+
 def sheet_ssqa(
-        progress: bool = True,
-        cpu=True
-        _id="bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337"
-    ):
+    progress: bool = True,
+    cpu=True,
+    _id="bvcc+somos+singmos+nisqa+tmhint-qi+tencent+pstn+urgent2024-mos/sslmos-wavlm_large/1337",
+):
     """
     Load pretrained model from HuggingFace Models.
     As of Sep 2025, the default is the SSL-MOS model trained with all EIGHT training sets in MOS-Bench.
@@ -148,7 +162,7 @@ def sheet_ssqa(
     hf_hub_download(
         repo_id="unilight/sheet-models",
         filename=os.path.join(_id, "config.yml"),
-        local_dir=torch.hub.get_dir()
+        local_dir=torch.hub.get_dir(),
     )
     config_dst = os.path.join(torch.hub.get_dir(), _id, "config.yml")
     with open(config_dst) as f:
@@ -157,6 +171,7 @@ def sheet_ssqa(
     # init model
     if config["model_type"] == "SSLMOS":
         from sheet.models.sslmos import SSLMOS
+
         model = SSLMOS(
             config["model_input"],
             **config["model_params"],
@@ -165,13 +180,15 @@ def sheet_ssqa(
     # download model
     hf_hub_download(
         repo_id="unilight/sheet-models",
-        filename=os.path.join(_id, , "checkpoint-best.bin"),
-        local_dir=torch.hub.get_dir()
+        filename=os.path.join(_id, "checkpoint-best.bin"),
+        local_dir=torch.hub.get_dir(),
     )
     checkpoint_dst = os.path.join(torch.hub.get_dir(), _id, "checkpoint-best.bin")
 
     # load model
-    model.load_state_dict(torch.load(checkpoint_dst, weights_only=True, map_location=map_location))
+    model.load_state_dict(
+        torch.load(checkpoint_dst, weights_only=True, map_location=map_location)
+    )
     model.eval()
 
     # send model to a Predictor wrapper

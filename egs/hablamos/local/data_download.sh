@@ -11,13 +11,11 @@ cwd=`pwd`
 if [ ! -e ${db}/hablamos.done ]; then
     mkdir -p ${db}
     cd ${db}
-
     wget https://zenodo.org/records/17024887/files/HablaMOS.tar.gz
-    tar zxcf HablaMOS.tar.gz
-    rm -f HablaMOS.tar.gz
+    tar zxvf HablaMOS.tar.gz
+    rm HablaMOS.tar.gz
     mv HablaMOS/* .
-    rm -rf HablaMOS/
-
+    rm -r HablaMOS/
     cd $cwd
     echo "Successfully finished download."
     touch ${db}/hablamos.done

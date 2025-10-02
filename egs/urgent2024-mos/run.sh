@@ -17,7 +17,8 @@ seed=1337
 conf=conf/ssl-mos-wavlm_large.yaml
 
 # dataset configuration
-db_root=/data/group1/z44476r/Corpora/urgent2024_mos  # change this to your dataset folder
+# db_root=/data/group1/z44476r/Corpora/urgent2024_mos  # change this to your dataset folder
+db_root=./downloads
 target_sampling_rate=16000
 
 # training related setting
@@ -42,8 +43,7 @@ set -euo pipefail
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data and Pretrained Model Download"
 
-    # Just provide instructions?
-
+    local/data_download.sh ${db_root}
 fi
 
 mkdir -p "data"

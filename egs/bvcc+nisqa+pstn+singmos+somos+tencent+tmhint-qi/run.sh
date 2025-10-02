@@ -61,7 +61,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
         "../nisqa/data/nisqa_train.csv" \
         "../pstn/data/pstn_train.csv" \
         "../singmos/data/singmos_train.csv" \
-        "../somos/data/somos_train.csv" \
+        "../somos/data/train.csv" \
         "../tencent/data/tencent_train.csv" \
         "../tmhint-qi/data/tmhintqi_train.csv"
     local/data_prep.py \
@@ -71,7 +71,7 @@ if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
         "../nisqa/data/nisqa_dev.csv" \
         "../pstn/data/pstn_dev.csv" \
         "../singmos/data/singmos_dev.csv" \
-        "../somos/data/somos_dev.csv" \
+        "../somos/data/dev.csv" \
         "../tencent/data/tencent_dev.csv" \
         "../tmhint-qi/data/tmhintqi_dev.csv"
 fi
@@ -202,10 +202,12 @@ fi
 ###########################################################################
 
 if [ "${stage}" -le 4 ] && [ "${stop_stage}" -ge 4 ]; then
-    echo "Stage 4: Train RAMP"
+    echo "Stage 4: Train fusion net of RAMP"
 
     [ ! -e "${expdir}" ] && mkdir -p "${expdir}"
     echo "Training start. See the progress via ${expdir}/train.log."
+
+    ln -sf "$(realpath $(ls -l ${pretrained_model_checkpoint} | awk '{print $NF}'))" ${pretrained_model_checkpoint}
 
     pretrained_model_dir="$(dirname ${pretrained_model_checkpoint})"
     pretrained_model_checkpoint_name=$(basename ${pretrained_model_checkpoint%.*})
@@ -226,4 +228,28 @@ if [ "${stage}" -le 4 ] && [ "${stop_stage}" -ge 4 ]; then
             --seed "${seed}"
 
     echo "Successfully finished training."
+fi
+
+if [ "${stage}" -le 5 ] && [ "${stop_stage}" -ge 5 ]; then
+    echo "Stage 5: Inference"
+    # shellcheck disable=SC2012
+
+    [ -z "${checkpoint}" ] && checkpoint="${expdir}/checkpoint-best.pkl"
+    outdir="${expdir}/results/$(basename "${checkpoint}" .pkl)"
+
+    for name in "dev"; do
+        [ ! -e "${outdir}/${name}" ] && mkdir -p "${outdir}/${name}"
+        [ "${n_gpus}" -gt 1 ] && n_gpus=1
+        echo "Inference start. See the progress via ${outdir}/${name}/inference.log."
+        ${cuda_cmd} --gpu "${n_gpus}" "${outdir}/${name}/inference.log" \
+            inference.py \
+                --config "${expdir}/config.yml" \
+                --csv-path "data/${name}.csv" \
+                --checkpoint "${checkpoint}" \
+                --outdir "${outdir}/${name}" \
+                --verbose "${verbose}"
+        echo "Successfully finished inference of ${name} set."
+        grep "UTT" "${outdir}/${name}/inference.log"
+    done
+    echo "Successfully finished inference."
 fi

@@ -47,8 +47,8 @@ inference_mode: mean_net    # this is used for
 ###########################################################
 #                  DATA LOADER SETTING                    #
 ###########################################################
-train_batch_size: 16
-test_batch_size: 1
+train_batch_size: 8
+test_batch_size: 2
 padding_mode: "repetitive"  # repetitive, zero_padding
 wav_only: True              # Reduce to average only even for the training data.
                             # Set to True usually if no use listener modeling at all (ex. SSL-MOS)

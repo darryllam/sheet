@@ -13,12 +13,11 @@ import pickle
 import time
 
 import numpy as np
-import torch
-import yaml
-
 import sheet
 import sheet.datasets
 import sheet.models
+import torch
+import yaml
 
 
 def main():

@@ -43,7 +43,7 @@ set -euo pipefail
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data and Pretrained Model Download"
 
-    local/data_download.sh ${brspeechmos_db_root}
+    ../brspeechmos/local/data_download.sh ${brspeechmos_db_root}
 fi
 
 

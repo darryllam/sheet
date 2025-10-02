@@ -43,7 +43,7 @@ set -euo pipefail
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data and Pretrained Model Download"
 
-    local/data_download.sh ${tmhintqi_db_root}
+    ../tmhint-qi/local/data_download.sh ${tmhintqi_db_root}
 fi
 
 

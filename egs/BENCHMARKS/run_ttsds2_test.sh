@@ -43,7 +43,7 @@ set -euo pipefail
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then
     echo "stage -1: Data and Pretrained Model Download"
 
-    local/data_download.sh ${tmhintqi_db_root}
+    ../ttsds2/local/data_download.sh ${tmhintqi_db_root}
 fi
 
 
@@ -51,10 +51,12 @@ mkdir -p "${datadir}"
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     echo "stage 0: Data preparation"
 
-    ../tmhint-qi/local/data_prep.py \
-        --original-path "${tmhintqi_db_root}/raw_data.csv" --wavdir "${tmhintqi_db_root}/train" --setname "dev" --out "${datadir}/tmhintqi_dev.csv" --seed "${seed}" --domain-idx "${domain_idx}"
-    ../tmhint-qi/local/data_prep.py \
-        --original-path "${tmhintqi_db_root}/raw_data.csv" --wavdir "${tmhintqi_db_root}/test" --setname "test" --out "${datadir}/tmhintqi_test.csv" --seed "${seed}" --domain-idx "${domain_idx}"
+    mkdir -p "${db_root}/wav_${target_sampling_rate}" 
+
+    # parse original csv file to an unified format
+    local/data_prep.py \
+        --original-path "${db_root}/subjective_results.csv" --wavdir "${db_root}" --out "data/${test_set}.csv" --seed "${seed}" \
+        --resample --target-sampling-rate "${target_sampling_rate}" --target-wavdir "${db_root}/wav_${target_sampling_rate}"
 fi
 
 if [ "${stage}" -le 1 ] && [ "${stop_stage}" -ge 1 ]; then

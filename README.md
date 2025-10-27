@@ -73,8 +73,10 @@ You don't need to prepare an environment (using conda, etc.) first. The followin
 
 ```bash
 git clone https://github.com/unilight/sheet.git
-cd sheet/tools
-make
+cd sheet
+uv venv tools/venv
+source tools/venv/bin/activate
+uv sync --active
 ```
 
 ## Information

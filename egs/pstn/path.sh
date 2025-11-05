@@ -1,8 +1,8 @@
 # path related
 export PRJ_ROOT="${PWD}/../.."
-if [ -e "${PRJ_ROOT}/tools/venv/bin/activate" ]; then
+if [ -e "${PRJ_ROOT}/.venv/bin/activate" ]; then
     # shellcheck disable=SC1090
-    . "${PRJ_ROOT}/tools/venv/bin/activate"
+    . "${PRJ_ROOT}/.venv/bin/activate"
 fi
 
 MAIN_ROOT=$PWD/../..

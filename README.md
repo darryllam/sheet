@@ -69,7 +69,7 @@ Full installation is needed if your goal is to do **training**.
 
 ### Editable installation with virtualenv 
 
-First install the uv package manager [here](https://docs.astral.sh/uv/getting-started/installation/). Then, use the following commands to automatically construct a virtual environment in `.venv`. When you run the recipes, the scripts will automatically activate the virtual environment.
+First install the uv package manager [here](https://docs.astral.sh/uv/getting-started/installation/). Then, use the following commands to automatically construct a virtual environment in `tools/venv`. When you run the recipes, the scripts will automatically activate the virtual environment.
 
 ```bash
 git clone https://github.com/unilight/sheet.git

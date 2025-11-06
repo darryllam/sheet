@@ -74,7 +74,7 @@ First install the uv package manager [here](https://docs.astral.sh/uv/getting-st
 ```bash
 git clone https://github.com/unilight/sheet.git
 cd sheet
-uv sync --extras train
+bash install.sh train
 ```
 
 ## Information

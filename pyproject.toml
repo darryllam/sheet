@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "sheet"
-version = "0.1.0"
+version = "0.2.5"
 description = "Speech Human Evaluation Estimation Toolkit (SHEET)"
 requires-python = "==3.10.13"
 

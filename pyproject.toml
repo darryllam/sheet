@@ -1,6 +1,6 @@
 [build-system]
-requires = ["uv_build"]
-build-backend = "uv_build"
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "sheet"
@@ -35,4 +35,9 @@ train = [
     "kaldiio>=2.14.1",
     "humanfriendly>=10.0",
     "prettytable>=3.16.0",
+]
+
+[tool.setuptools]
+packages = [
+    "sheet"
 ]
